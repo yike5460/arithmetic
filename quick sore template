@@ -1,0 +1,26 @@
+public class solution {
+  /*data is a integer array for example*/
+  private void quicksort (int []data, int start, int end) {
+    if(start >= end) return;
+    int left = start;
+    int right = end;
+    int pivot = data[(left + right)/2];
+    while(left <= right) {
+      while((left <= right) && data[left] < pivot) {
+        left++;
+      }
+      while((left <= right) && data[right] > pivot) {
+        right++;
+      }
+      if(left <= right) {
+        int temp = data[left];
+        data[left] = data[right];
+        data[right] = temp;
+      }
+      left++;
+      right++;
+    }
+    quicksort(data, start, right);
+    quicksort(data, left, end);
+  }
+}
