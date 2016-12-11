@@ -1,0 +1,27 @@
+/*declaration*/
+#ifndef _LIST_H
+
+struct Node;
+typedef struct node *PtrToNode;
+typedef PtrToNode List;
+typeded PtrToNode Position;
+
+List MakeEmpty(List L);
+int IsEmpty(List L);
+int IsLast(List L);
+Position Find(ElementType X, List L);
+void Delete(ElementType X, List L);
+Position FindPrevious(ElementType X, List L);
+void Insert(ElementType X, List L, Position P);
+void DelelteList(List L);
+Position Header(List L);
+Postion First(List L);
+Position Advance(Position P);
+ElementType Retrieve(Position P);
+
+#endif /*_LIST_H*/
+
+struct Node {
+  ElementType Element;
+  Position Next;
+}
