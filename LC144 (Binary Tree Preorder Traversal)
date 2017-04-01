@@ -1,0 +1,81 @@
+class Solution {
+public:
+
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> res;  
+        TreeNode* cur = root;  
+        TreeNode* pre = NULL;  
+        while(cur != NULL)  
+        {  
+            /*handle current node and move to right tree if left tree is empty*/
+            if(cur->left == NULL)  {  
+                res.push_back(cur->val);  
+                cur = cur->right;  
+            } else {  
+                pre = cur->left;
+                /*find unhandled right leaf node*/
+                while(pre->right!=NULL && pre->right!=cur)  
+                    pre = pre->right;
+                /*make right leaf node point to next to be processed node*/
+                if(pre->right==NULL) {  
+                    res.push_back(cur->val);  
+                    pre->right = cur;  
+                    cur = cur->left;  
+                } else {  
+                    pre->right = NULL;  
+                    cur = cur->right;  
+                }  
+            }  
+        }  
+        return res; 
+    }
+};
+
+class Solution {
+public:
+
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> res;  
+        TreeNode* cur = root;  
+        TreeNode* pre = NULL;  
+        while(cur != NULL)  
+        {  
+            /*handle current node and move to right tree if left tree is empty*/
+            if(cur->left == NULL)  {  
+                res.push_back(cur->val);  
+                cur = cur->right;  
+            } else {  
+                pre = cur->left;
+                /*find unhandled right leaf node*/
+                while(pre->right!=NULL && pre->right!=cur)  
+                    pre = pre->right;
+                /*make right leaf node point to next to be processed node*/
+                if(pre->right==NULL) {  
+                    res.push_back(cur->val);  
+                    pre->right = cur;  
+                    cur = cur->left;  
+                } else {  
+                    pre->right = NULL;  
+                    cur = cur->right;  
+                }  
+            }  
+        }  
+        return res; 
+    }
+};
+
+class Solution {
+public:
+    void helper(vector<int> &res, TreeNode* root) {
+        if (!root) return;
+        res.push_back(root->val);
+        helper(res, root->left);
+        helper(res, root->right);
+        
+    }
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> res;
+        helper(res, root);
+        return res;
+    }
+};
