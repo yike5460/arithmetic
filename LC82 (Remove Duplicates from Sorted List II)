@@ -1,0 +1,64 @@
+Given a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list.
+
+For example,
+Given 1->2->3->3->4->4->5, return 1->2->5.
+Given 1->1->1->2->3, return 2->3.
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        /*ListNode* tmp = head;
+        vector<int> val_array;
+        vector<int>::iterator pos;
+        while(tmp) {
+            val_array.push_back(tmp->val);
+            tmp = tmp->next;
+        }
+        sort(val_array.begin(), val_array.end());
+        pos = unique(val_array.begin(), val_array.end()); 
+        val_array.erase(val_array.begin(), pos);
+        
+        tmp = head;
+        ListNode* pre = head;
+        while(tmp) {
+            for(auto i:val_array) {
+                if((i == tmp->val) && (tmp == head)) {
+                    head = tmp->next;
+                    pre = tmp->next;
+                    break;
+                } else if ((i == tmp->val) && (tmp != head)) {
+                    pre->next = tmp->next;
+                }
+            }
+            tmp = tmp->next;
+        }
+        return head;*/
+        ListNode **runner = &head;
+        
+        if(!head || !head->next)return head;
+        
+        while(*runner)
+        {
+            if((*runner)->next && (*runner)->next->val == (*runner)->val)
+            {
+                ListNode *temp = *runner;
+                while(temp && (*runner)->val == temp->val)
+                    temp = temp->next;
+                
+                *runner = temp;
+            }
+            else
+                runner = &((*runner)->next);
+        }
+        
+        return head;
+    }
+};
